@@ -13,9 +13,10 @@ class SqlDiff < Formula
       -s -w
       -X main.Version=#{version}
       -X main.BuildTime=#{time.iso8601}
-      -X main.GitCommit=#{Utils.git_short_head}
     ]
-
+    if build.head?
+      ldflags << "-X main.GitCommit=#{Utils.git_short_head}"
+    end
     system "go", "build", *std_go_args(ldflags: ldflags), "./cmd/sql-diff"
     generate_completions_from_executable(bin/"sql-diff", "completion")
   end
