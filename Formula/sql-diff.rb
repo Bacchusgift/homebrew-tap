@@ -1,20 +1,25 @@
 class SqlDiff < Formula
   desc "智能 SQL 表结构比对工具，支持交互式多行输入和 AI 分析"
   homepage "https://bacchusgift.github.io/sql-diff/"
-  url "https://github.com/Bacchusgift/sql-diff/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "0a9beb848c1a3f4332879454589fbd9df12d75cc01a7c2b851e504aab8cc63f6"
+  url "https://github.com/Bacchusgift/sql-diff/archive/refs/tags/v1.0.3.tar.gz"
+  sha256 "d06d81110be8aee9f2ff8f18292575b3f731fbf41365e3399cc5477cc9c8c868"
   license "MIT"
   head "https://github.com/Bacchusgift/sql-diff.git", branch: "main"
 
   depends_on "go" => :build
 
   def install
+    # 构建标志
     ldflags = %W[
       -s -w
       -X main.Version=#{version}
       -X main.BuildTime=#{time.iso8601}
-      -X main.GitCommit=#{Utils.git_short_head}
     ]
+    
+    # 仅在 HEAD 版本（从 Git 安装）时添加 GitCommit
+    if build.head?
+      ldflags << "-X main.GitCommit=#{Utils.git_short_head}"
+    end
 
     system "go", "build", *std_go_args(ldflags: ldflags), "./cmd/sql-diff"
     generate_completions_from_executable(bin/"sql-diff", "completion")
