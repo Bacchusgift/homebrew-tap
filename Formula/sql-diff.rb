@@ -1,8 +1,8 @@
 class SqlDiff < Formula
   desc "智能 SQL 表结构比对工具，支持交互式多行输入和 AI 分析"
   homepage "https://bacchusgift.github.io/sql-diff/"
-  url "https://github.com/Bacchusgift/sql-diff/archive/refs/tags/v1.0.5.tar.gz"
-  sha256 "4356e8e4706aaa2a909a52f08683058f01b0134a7e7230a938bbe0b0615d8cbb"
+  url "https://github.com/Bacchusgift/sql-diff/archive/refs/tags/v1.0.7.tar.gz"
+  sha256 "c9f16bb616b359483bd37665b939434198314024d00c9c1d3a9852ee2f3fef71"
   license "MIT"
   head "https://github.com/Bacchusgift/sql-diff.git", branch: "main"
 
